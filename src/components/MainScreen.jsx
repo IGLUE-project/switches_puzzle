@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import "./../assets/scss/MainScreen.scss";
 import Switch from "./Switch";
-import FixWiringGame from "./Wires";
+import RoundButton from "./RoundButton";
 
 export default function MainScreen({ show, config, solvePuzzle, solved, solvedTrigger }) {
   const [switches, setSwitches] = useState([]);
 
   useEffect(() => {
     if (config.switches && config.switches.length > 0) {
-      setSwitches(config.switches.map(() => false));
+      setSwitches(config.switches.map((s) => s));
     }
   }, [config.switches]);
   const click = () => {
@@ -16,14 +16,20 @@ export default function MainScreen({ show, config, solvePuzzle, solved, solvedTr
   };
 
   return (
-    <div id="MainScreen" className={"screen_wrapper" + (show ? "" : " screen_hidden")}>
+    <div
+      id="MainScreen"
+      className={"screen_wrapper" + (show ? "" : " screen_hidden")}
+      style={{ backgroundImage: `url(/src/assets/images/panel.png)` }}
+    >
       <div className="frame">
-        <div className="wires">
-          {switches.map((_, index) => (
-            <Switch key={index} solved={solved} onClick={click} solvedTrigger={solvedTrigger} />
+        <div className="switches">
+          {switches.map((s, index) => (
+            <Switch key={index} solved={solved} onClick={click} solvedTrigger={solvedTrigger} switchData={s} />
           ))}
         </div>
-        <img className="panelopen" src="/src/assets/images/panel_electrico_abierto.png" alt="panel electrico abierto" />
+        <div className="button">
+          <RoundButton />
+        </div>
       </div>
     </div>
   );

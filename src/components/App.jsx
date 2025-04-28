@@ -21,35 +21,48 @@ import ControlPanel from "./ControlPanel.jsx";
 let escapp;
 const initialConfig = {
   config: {
-    nSwitches: 4,
-    switchType: SWITCHTYPE.NUMBERS,
+    nSwitches: 6,
+    switchType: SWITCHTYPE.CUSTOM,
     theme: THEMES.BASIC,
   },
   customSwitches: [
     {
       color: "#3abf19",
-      areaColor: "",
       label: "👽",
       image: "",
       ico: "",
     },
     {
       color: "#c70000",
-      areaColor: "",
-      label: "cable 1",
-      image: "/src/assets/images/estrella.svg",
+      label: "switch 2",
+      image: "/src/assets/react.svg",
     },
     {
       color: "#0021c7",
-      areaColor: "#0021c7",
       label: "cable 2",
       image: "",
+      colorIco: "#fff",
     },
     {
       color: "#c700b5",
-      areaColor: "",
       label: "cable 3",
       image: "",
+      ico: "circle",
+      colorIco: "#fff",
+    },
+    {
+      color: "#c700b5",
+      label: "cable 3",
+      image: "",
+      ico: "star",
+      colorIco: "red",
+    },
+    {
+      color: "#c700b5",
+      label: "cable 3",
+      image: "",
+      ico: "square",
+      colorIco: "yellow",
     },
   ],
 };
@@ -61,7 +74,7 @@ export default function App() {
   const [fail, setFail] = useState(false);
   const [solved, setSolved] = useState(false);
   const [solvedTrigger, setSolvedTrigger] = useState(0);
-  const [config, setConfig] = useState(initialConfig);
+  const [config, setConfig] = useState({});
 
   useEffect(() => {
     console.log("useEffect, lets load everything");
@@ -115,32 +128,30 @@ export default function App() {
       switches: [],
     };
 
-    let switches = [];
-
     switch (config.switchType) {
       case SWITCHTYPE.NUMBERS:
-        switches = (_, i) => ({ label: i + 1 });
+        configuration.switches = (_, i) => ({ label: i + 1 });
         break;
       case SWITCHTYPE.COLORS:
-        switches = (_, i) => ({ areaColor: `hsla(${(i * 360) / config.nSwitches}, 100%, 50%, 0.20)` });
+        configuration.switches = (_, i) => ({ areaColor: `hsla(${(i * 360) / config.nSwitches}, 100%, 50%, 0.20)` });
         break;
       case SWITCHTYPE.SHAPES:
-        switches = (_, i) => ({ ico: ICONS[i % ICONS.length] || "" });
+        configuration.switches = (_, i) => ({ ico: ICONS[i % ICONS.length] || "" });
         break;
       case SWITCHTYPE.COLORED_SHAPES:
-        switches = (_, i) => ({
+        configuration.switches = (_, i) => ({
           ico: ICONS[i % ICONS.length] || "",
           colorIco: `hsla(${(i * 360) / config.nSwitches}, 100%, 50%, 0.20)`,
         });
         break;
       case SWITCHTYPE.CUSTOM:
-        switches = customSwitches;
+        configuration.switches = customSwitches;
         break;
       default:
-        switches = (_, i) => ({ label: String.fromCharCode(65 + (i % 26)) });
+        configuration.switches = (_, i) => ({ label: String.fromCharCode(65 + (i % 26)) });
     }
     if (config.switchType !== SWITCHTYPE.CUSTOM) {
-      configuration.switches = Array.from({ length: config.nSwitches }, switches);
+      configuration.switches = Array.from({ length: config.nSwitches }, configuration.switches);
     }
 
     console.log(configuration);
@@ -157,7 +168,7 @@ export default function App() {
           solved={solved}
           solvedTrigger={solvedTrigger}
         />
-        <ControlPanel show={screen === CONTROL_PANEL_SCREEN} onOpenScreen={onOpenScreen} />
+        {/* <ControlPanel show={screen === CONTROL_PANEL_SCREEN} onOpenScreen={onOpenScreen} /> */}
       </div>
     </div>
   );
