@@ -2,20 +2,15 @@ div#MainScreen {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-position: center;
+  background-size: contain;
   background-repeat: no-repeat;
-  width: 120%;
-  background-size: cover;
+  background-position: center;
 
   div.frame {
-    width: 29%;
-    height: 75%;
     display: flex;
-    background-color: gainsboro;
     justify-content: space-around;
     align-items: center;
-    margin-top: -90px;
-    border-radius: 40px;
+    margin-top: -3%;
 
     img.panelopen {
       position: absolute;
@@ -26,15 +21,18 @@ div#MainScreen {
     }
     div.switches {
       display: flex;
-      justify-content: center;
-      align-content: center;
-      align-items: center;
+      align-content: space-around;
       flex-wrap: wrap;
       gap: 10px;
       width: 70%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
     }
     div.button {
-      width: 15%;
+      width: 10%;
+      aspect-ratio: 1;
+      cursor: pointer;
     }
   }
 }

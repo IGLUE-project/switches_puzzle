@@ -4,7 +4,7 @@ import { iconMap } from "../icons/shapesIcons";
 
 let audioSwitchUp, audioSwitchDown;
 
-const Switch = ({ onClick, solved, solvedTrigger, switchData }) => {
+const Switch = ({ onClick, solved, solvedTrigger, switchData, theme }) => {
   const [activo, setActivo] = useState(false);
   const [error, setError] = useState(false);
 
@@ -34,14 +34,21 @@ const Switch = ({ onClick, solved, solvedTrigger, switchData }) => {
   };
 
   return (
-    <div className="Switch" style={{ backgroundColor: switchData.color + "99" }}>
+    <div
+      className="Switch"
+      // style={{ backgroundColor: switchData.color + "99" }}
+    >
       <div className="led-box">
         <div className={solved ? "led-green" : activo ? (error ? "led-red" : "led-load") : "led-off"}></div>
       </div>
-      <div className="switchContainer" onClick={togglePalanca}>
-        <div className={`lever ${activo ? "active" : ""}`}></div>
-        <div className="handle"></div>
-      </div>
+
+      <img
+        className="switch-img"
+        src={activo ? theme.switchOnImg : theme.switchOffImg}
+        alt=""
+        onClick={togglePalanca}
+      />
+
       <div className="data">{getDataLabel()}</div>
 
       <audio id="audio_connection" src="sounds/connection.wav" autostart="false" preload="auto" />

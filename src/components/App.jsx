@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./../assets/scss/app.scss";
 import "./../assets/scss/modal.scss";
 
@@ -7,23 +6,15 @@ import { GLOBAL_CONFIG } from "../config/config.js";
 import * as I18n from "../vendors/I18n.js";
 import * as LocalStorage from "../vendors/Storage.js";
 
-import {
-  CONTROL_PANEL_SCREEN,
-  ICONS,
-  KEYPAD_SCREEN,
-  SWITCHTYPE,
-  THEME_ASSETS,
-  THEMES,
-} from "../constants/constants.jsx";
+import { ICONS, KEYPAD_SCREEN, SWITCHTYPE, THEME_ASSETS, THEMES } from "../constants/constants.jsx";
 import MainScreen from "./MainScreen.jsx";
-import ControlPanel from "./ControlPanel.jsx";
 
 let escapp;
 const initialConfig = {
   config: {
     nSwitches: 6,
     switchType: SWITCHTYPE.CUSTOM,
-    theme: THEMES.BASIC,
+    theme: THEMES.FUTURISTIC,
   },
   customSwitches: [
     {
@@ -74,7 +65,7 @@ export default function App() {
   const [fail, setFail] = useState(false);
   const [solved, setSolved] = useState(false);
   const [solvedTrigger, setSolvedTrigger] = useState(0);
-  const [config, setConfig] = useState({});
+  const [config, setConfig] = useState();
 
   useEffect(() => {
     console.log("useEffect, lets load everything");
@@ -161,13 +152,15 @@ export default function App() {
   return (
     <div id="firstnode">
       <div className={`main-background ${fail ? "fail" : ""}`}>
-        <MainScreen
-          show={screen === KEYPAD_SCREEN}
-          config={config}
-          solvePuzzle={solvePuzzle}
-          solved={solved}
-          solvedTrigger={solvedTrigger}
-        />
+        {config && (
+          <MainScreen
+            show={screen === KEYPAD_SCREEN}
+            config={config}
+            solvePuzzle={solvePuzzle}
+            solved={solved}
+            solvedTrigger={solvedTrigger}
+          />
+        )}
         {/* <ControlPanel show={screen === CONTROL_PANEL_SCREEN} onOpenScreen={onOpenScreen} /> */}
       </div>
     </div>
