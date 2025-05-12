@@ -1,60 +1,69 @@
-import React, { useEffect, useState } from "react";
 import "../assets/scss/Switch.scss";
 import { iconMap } from "../icons/shapesIcons";
 
-let audioSwitchUp, audioSwitchDown;
+const Switch = ({ id, switchData, theme, setSwitch, size }) => {
+  const ledBoxSize = size.width * 0.02;
+  const ledBoxMargin = size.width * 0.01;
+  const imgSize = size.width * 0.035;
+  const iconSize = size.width * 0.04;
+  const fontSize = size.width * 0.025;
 
-const Switch = ({ onClick, solved, solvedTrigger, switchData, theme }) => {
-  const [activo, setActivo] = useState(false);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    audioSwitchUp = document.getElementById("audio_switch1");
-    audioSwitchDown = document.getElementById("audio_switch2");
-  }, []);
   const togglePalanca = () => {
-    if (!activo) audioSwitchUp.play();
-    else audioSwitchDown.play();
-
-    setActivo(!activo);
+    setSwitch(id, !switchData.pressed);
   };
 
   const getDataLabel = () => {
-    if (switchData.image) return <img src={switchData.image} alt="Switch" />;
+    if (switchData.image)
+      return <img src={switchData.image} draggable={false} height={imgSize} width={imgSize} alt="Switch" />;
 
     if (switchData.ico) {
       const IconComponent = iconMap[switchData.ico.toLowerCase()];
       if (IconComponent) {
-        return <IconComponent color={switchData.colorIco} height={32} width={32} />;
+        return <IconComponent color={switchData.colorIco} height={iconSize} width={iconSize} />;
       }
     }
-    if (switchData.label) return <div>{switchData.label}</div>;
+    if (switchData.label) return <div style={{ fontSize: fontSize + "px" }}>{switchData.label}</div>;
 
     return null;
   };
 
+  function adjustColor(color, percent) {
+    const num = parseInt(color.replace("#", ""), 16);
+    const r = Math.min(255, Math.max(0, (num >> 16) + (255 * percent) / 100));
+    const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00ff) + (255 * percent) / 100));
+    const b = Math.min(255, Math.max(0, (num & 0x0000ff) + (255 * percent) / 100));
+
+    return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+  }
+
+  const inner = adjustColor(switchData.color, -40);
+  const glow = adjustColor(switchData.color, 10);
+
+  const ledCss = {
+    backgroundColor: switchData.color,
+    boxShadow: `rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset ${inner} 0 -1px 9px, ${glow} 0 2px 12px`,
+    height: ledBoxSize,
+    width: ledBoxSize,
+  };
+
   return (
-    <div
-      className="Switch"
-      // style={{ backgroundColor: switchData.color + "99" }}
-    >
-      <div className="led-box">
-        <div className={solved ? "led-green" : activo ? (error ? "led-red" : "led-load") : "led-off"}></div>
+    <div className="Switch">
+      <div className="led-box" style={{ margin: ledBoxMargin + "px 0" }}>
+        <div
+          style={switchData.pressed ? ledCss : { height: ledBoxSize, width: ledBoxSize }}
+          className={(switchData.pressed ? "" : "led-off") + " led"}
+        ></div>
       </div>
 
       <img
         className="switch-img"
-        src={activo ? theme.switchOnImg : theme.switchOffImg}
+        src={switchData.pressed ? theme.switchOnImg : theme.switchOffImg}
         alt=""
         onClick={togglePalanca}
+        draggable={false}
       />
 
       <div className="data">{getDataLabel()}</div>
-
-      <audio id="audio_connection" src="sounds/connection.wav" autostart="false" preload="auto" />
-      <audio id="audio_fail-connection" src="sounds/fail-connection.wav" autostart="false" preload="auto" />
-      <audio id="audio_switch1" src="sounds/switch1.wav" autostart="false" preload="auto" />
-      <audio id="audio_switch2" src="sounds/switch2.wav" autostart="false" preload="auto" />
     </div>
   );
 };

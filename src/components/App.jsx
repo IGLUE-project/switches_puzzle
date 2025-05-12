@@ -91,16 +91,23 @@ export default function App() {
   }, []);
 
   const solvePuzzle = (solution) => {
-    const solutionStr = solution.map((s) => s + 1).join(",");
+    const solutionStr = solution
+      .map((s) => {
+        if (s.pressed) return "on";
+        else return "off";
+      })
+      .join(",");
     console.log(solutionStr);
-    escapp.submitPuzzle(GLOBAL_CONFIG.escapp.puzzleId, JSON.stringify(solutionStr), {}, (success) => {
-      if (!success) {
-        // alert("ta mal");
-      } else {
-        // alert("ta bien");
-      }
+    escapp.submitPuzzle(GLOBAL_CONFIG.escapp.puzzleId, solutionStr, {}, (success) => {
       setSolved(success);
       setSolvedTrigger((prev) => prev + 1);
+
+      if (!success) {
+        setFail(true);
+        setTimeout(() => {
+          setFail(false);
+        }, 1500);
+      }
     });
   };
 
@@ -144,6 +151,11 @@ export default function App() {
     if (config.switchType !== SWITCHTYPE.CUSTOM) {
       configuration.switches = Array.from({ length: config.nSwitches }, configuration.switches);
     }
+
+    configuration.switches = configuration.switches.map((s) => {
+      s.pressed = false;
+      return s;
+    });
 
     console.log(configuration);
     setConfig(configuration);

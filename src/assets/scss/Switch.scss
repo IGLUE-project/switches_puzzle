@@ -13,6 +13,18 @@
     cursor: pointer;
   }
 
+  .led-box {
+    height: 30px;
+    width: 25%;
+    margin: 10px 0;
+    float: left;
+
+    .led {
+      margin: 0 auto;
+      border-radius: 50%;
+    }
+  }
+
   .data {
     display: flex;
     align-items: center;
@@ -21,26 +33,20 @@
   }
 }
 
-.led-box {
-  height: 30px;
-  width: 25%;
-  margin: 10px 0;
-  float: left;
-  p {
-    font-size: 12px;
-    text-align: center;
-    margin: 1em;
-  }
-}
-
-.led-red {
-  margin: 0 auto;
-  width: 24px;
-  height: 24px;
+.fail .led {
   background-color: #f00;
-  border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;
   animation: blinkRed 0.5s infinite;
+}
+
+.solved .led {
+  background-color: #abff00 !important;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px !important;
+}
+
+.led-off {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #535353 0 -1px 9px;
+  background-color: gainsboro;
 }
 
 @keyframes blinkRed {
@@ -54,30 +60,4 @@
   to {
     background-color: #f00;
   }
-}
-
-.led-green {
-  margin: 0 auto;
-  width: 24px;
-  height: 24px;
-  background-color: #abff00;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
-}
-
-.led-off {
-  margin: 0 auto;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #535353 0 -1px 9px;
-  background-color: gainsboro;
-}
-.led-load {
-  margin: 0 auto;
-  width: 24px;
-  height: 24px;
-  background-color: #ff0;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
 }

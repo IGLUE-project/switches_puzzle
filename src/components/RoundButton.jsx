@@ -1,7 +1,3 @@
-import { useState } from "react";
-
-export default function RoundButton({ theme }) {
-  const [activo, setActivo] = useState(false);
-
-  return <img src={theme.buttonImg} style={{ height: "100%" }} />;
+export default function RoundButton({ theme, onClick }) {
+  return <img src={theme.buttonImg} onClick={onClick} draggable={false} style={{ height: "100%" }} />;
 }
