@@ -14,7 +14,7 @@ const initialConfig = {
   config: {
     nSwitches: 6,
     switchType: SWITCHTYPE.CUSTOM,
-    theme: THEMES.BASIC,
+    theme: THEMES.ANCIENT,
   },
   customSwitches: [
     {

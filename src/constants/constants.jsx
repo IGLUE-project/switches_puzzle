@@ -46,7 +46,7 @@ export const THEME_ASSETS = {
     switchDownAudio: "sounds/switch2.wav",
     failAudio: "sounds/fail-connection.wav",
     connectionAudio: "sounds/connection.wav",
-    buttonAudio: "sounds/button-stone.wav",
+    buttonAudio: "sounds/button.wav",
   },
   [THEMES.CONTEMPORARY]: {
     backgroundImg: "/src/assets/images/basic_bg.png",
@@ -57,7 +57,7 @@ export const THEME_ASSETS = {
     switchDownAudio: "sounds/switch2.wav",
     failAudio: "sounds/fail-connection.wav",
     connectionAudio: "sounds/connection.wav",
-    buttonAudio: "sounds/button-stone.wav",
+    buttonAudio: "sounds/button.wav",
   },
   [THEMES.FUTURISTIC]: {
     backgroundImg: "/src/assets/images/futuristic_bg.png",
@@ -68,6 +68,6 @@ export const THEME_ASSETS = {
     switchDownAudio: "sounds/switch2.wav",
     failAudio: "sounds/fail-connection.wav",
     connectionAudio: "sounds/connection.wav",
-    buttonAudio: "sounds/button-stone.wav",
+    buttonAudio: "sounds/button.wav",
   },
 };

@@ -15,6 +15,7 @@ export default function MainScreen({ show, config, solvePuzzle, solved, solvedTr
   const audioSwitchDown = document.getElementById("audio_switch2");
   const audioFail = document.getElementById("audio_fail-connection");
   const audioSuccess = document.getElementById("audio_connection");
+  const audioButton = document.getElementById("audio_button");
 
   useEffect(() => {
     if (config.switches && config.switches.length > 0) {
@@ -44,7 +45,12 @@ export default function MainScreen({ show, config, solvePuzzle, solved, solvedTr
   }, [solvedTrigger]);
 
   const click = () => {
-    if (controls) solvePuzzle(switches);
+    if (controls) {
+      audioButton.play();
+      setTimeout(() => {
+        solvePuzzle(switches);
+      }, 500);
+    }
   };
 
   const setSwitch = (index, value) => {
@@ -98,10 +104,11 @@ export default function MainScreen({ show, config, solvePuzzle, solved, solvedTr
           <RoundButton theme={config.theme} onClick={click} />
         </div>
       </div>
-      <audio id="audio_switch1" src="sounds/switch1.wav" autostart="false" preload="auto" />
-      <audio id="audio_switch2" src="sounds/switch2.wav" autostart="false" preload="auto" />
-      <audio id="audio_connection" src="sounds/connection.wav" autostart="false" preload="auto" />
-      <audio id="audio_fail-connection" src="sounds/fail-connection.wav" autostart="false" preload="auto" />
+      <audio id="audio_switch1" src={config.theme.switchUpAudio} autostart="false" preload="auto" />
+      <audio id="audio_switch2" src={config.theme.switchDownAudio} autostart="false" preload="auto" />
+      <audio id="audio_connection" src={config.theme.connectionAudio} autostart="false" preload="auto" />
+      <audio id="audio_fail-connection" src={config.theme.failAudio} autostart="false" preload="auto" />
+      <audio id="audio_button" src={config.theme.buttonAudio} autostart="false" preload="auto" />
     </div>
   );
 }
