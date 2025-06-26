@@ -3,6 +3,7 @@ import "./../assets/scss/app.scss";
 import "./../assets/scss/modal.scss";
 
 import {
+  COLORS,
   DEFAULT_APP_SETTINGS,
   ESCAPP_CLIENT_SETTINGS,
   ICONS,
@@ -122,16 +123,13 @@ export default function App() {
         switches = (_, i) => ({ label: i + 1 });
         break;
       case SWITCHTYPE.COLORS:
-        switches = (_, i) => ({ areaColor: `hsla(${(i * 360) / _appSettings.nSwitches}, 100%, 50%, 0.20)` });
+        switches = (_, i) => ({ color: COLORS[i % COLORS.length] });
         break;
       case SWITCHTYPE.SHAPES:
         switches = (_, i) => ({ ico: ICONS[i % ICONS.length] || "" });
         break;
       case SWITCHTYPE.COLORED_SHAPES:
-        switches = (_, i) => ({
-          ico: ICONS[i % ICONS.length] || "",
-          colorIco: `hsla(${(i * 360) / _appSettings.nSwitches}, 100%, 50%, 0.20)`,
-        });
+        switches = (_, i) => ({ ico: ICONS[i % ICONS.length] || "", colorIco: COLORS[i % COLORS.length] });
         break;
       case SWITCHTYPE.CUSTOM:
         switches = _appSettings.customSwitches;

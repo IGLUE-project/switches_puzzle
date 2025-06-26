@@ -23,7 +23,38 @@ export const ESCAPP_CLIENT_SETTINGS = {
   imagesPath: "./images/",
 };
 
-export const ICONS = ["circle", "triangle", "square", "pentagon", "star", "hexagon"];
+export const ICONS = [
+  "Circle",
+  "Triangle",
+  "Square",
+  "Pentagon",
+  "Star",
+  "Hexagon",
+  "Clubs",
+  "Diamonds",
+  "Hearts",
+  "Spades",
+  "Moon",
+  "Puzzle",
+  "Sun",
+  "Rhombus",
+];
+export const COLORS = [
+  "Red",
+  "Green",
+  "Blue",
+  "Yellow",
+  "Orange",
+  "Pink",
+  "Cyan",
+  "Purple",
+  "Brown",
+  "Black",
+  "Gray",
+  "White",
+  "Turquoise",
+  "Lime",
+];
 
 export const THEME_ASSETS = {
   [THEMES.RETRO]: {
