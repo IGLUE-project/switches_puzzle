@@ -2,18 +2,27 @@ import { useContext, useEffect, useRef, useState } from "react";
 import "./../assets/scss/app.scss";
 import "./../assets/scss/modal.scss";
 
-import { ALLOWED_ACTIONS, DEFAULT_APP_SETTINGS, ESCAPP_CLIENT_SETTINGS, ICONS, SWITCHTYPE, THEME_ASSETS } from "../constants/constants.jsx";
+import {
+  ALLOWED_ACTIONS,
+  DEFAULT_APP_SETTINGS,
+  ESCAPP_CLIENT_SETTINGS,
+  ICONS,
+  SWITCHTYPE,
+  THEME_ASSETS,
+} from "../constants/constants.jsx";
 import MainScreen from "./MainScreen.jsx";
 import { GlobalContext } from "./GlobalContext.jsx";
 
 export default function App() {
-  const { escapp, setEscapp, appSettings, setAppSettings, Storage, setStorage, Utils, I18n } = useContext(GlobalContext);
+  const { escapp, setEscapp, appSettings, setAppSettings, Storage, setStorage, Utils, I18n } =
+    useContext(GlobalContext);
   const hasExecutedEscappValidation = useRef(false);
 
   const [loading, setLoading] = useState(true);
   const [fail, setFail] = useState(false);
   const [solved, setSolved] = useState(false);
   const [solvedTrigger, setSolvedTrigger] = useState(0);
+  const [loadedSolution, setLoadedSolution] = useState(null);
 
   useEffect(() => {
     //Init Escapp client
@@ -81,9 +90,7 @@ export default function App() {
         if (escapp.getAllPuzzlesSolved()) {
           let solution = escapp.getLastSolution();
           if (typeof solution !== "undefined") {
-            // TODO: setSolution(solution);
-            setSolved(true);
-            setSolvedTrigger(solution);
+            setLoadedSolution(solution);
           }
         }
       }
@@ -201,10 +208,21 @@ export default function App() {
   return (
     <div
       id="global_wrapper"
-      className={`${appSettings !== null && typeof appSettings.skin === "string" ? appSettings.skin.toLowerCase() : ""}`}
+      className={`${
+        appSettings !== null && typeof appSettings.skin === "string" ? appSettings.skin.toLowerCase() : ""
+      }`}
     >
       <div className={`main-background ${fail ? "fail" : ""}`}>
-        {!loading && <MainScreen config={appSettings} solvePuzzle={solvePuzzle} solved={solved} solvedTrigger={solvedTrigger} />}
+        {!loading && (
+          <MainScreen
+            config={appSettings}
+            solvePuzzle={solvePuzzle}
+            solved={solved}
+            solvedTrigger={solvedTrigger}
+            loadedSolution={loadedSolution}
+            setSolved={setSolved}
+          />
+        )}
       </div>
     </div>
   );

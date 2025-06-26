@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./../assets/scss/MainScreen.scss";
-import Switch from "./Switch";
 import RoundButton from "./RoundButton";
+import Switch from "./Switch";
 
-export default function MainScreen({ show, config, solvePuzzle, solved, solvedTrigger }) {
+export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger, loadedSolution, setSolved }) {
   const [switches, setSwitches] = useState([]);
   const [size, setSize] = useState({
     width: window.innerWidth,
@@ -11,11 +11,11 @@ export default function MainScreen({ show, config, solvePuzzle, solved, solvedTr
   });
   const [controls, setControls] = useState(true);
 
-  const audioSwitchUp = document.getElementById("audio_switch1");
-  const audioSwitchDown = document.getElementById("audio_switch2");
-  const audioFail = document.getElementById("audio_fail-connection");
-  const audioSuccess = document.getElementById("audio_connection");
-  const audioButton = document.getElementById("audio_button");
+  const audioSwitchUp = useRef(null);
+  const audioSwitchDown = useRef(null);
+  const audioFail = useRef(null);
+  const audioSuccess = useRef(null);
+  const audioButton = useRef(null);
 
   useEffect(() => {
     if (config.switches && config.switches.length > 0) {
@@ -24,35 +24,47 @@ export default function MainScreen({ show, config, solvePuzzle, solved, solvedTr
   }, [config.switches]);
 
   useEffect(() => {
+    if (switches.length > 0 && !solved && loadedSolution) {
+      const _result = loadedSolution.split(",");
+
+      setSwitches((prev) =>
+        prev.map((s, i) => {
+          const state = _result[i];
+          if (state === "on") return { ...s, pressed: true };
+          if (state === "off") return { ...s, pressed: false };
+          return s;
+        }),
+      );
+
+      setControls(false);
+      setSolved(true);
+    }
+  }, [loadedSolution, switches]);
+
+  useEffect(() => {
+    if (loadedSolution) return;
     if (!solved) {
-      if (audioSwitchDown) audioSwitchDown.play();
-      if (audioFail) audioFail.play();
+      audioSwitchDown.current?.play();
+      audioFail.current?.play();
       setControls(false);
       setSwitches((prevSwitches) =>
         prevSwitches.map((s) => ({
           ...s,
           pressed: false,
-        }))
+        })),
       );
       setTimeout(() => {
         setControls(true);
       }, 1500);
     } else {
-      if (audioSuccess) audioSuccess.play();
+      audioSuccess.current?.play();
       setControls(false);
-      if (typeof solvedTrigger === "string") {
-        const _result = solvedTrigger.split(",");
-        _result.map((r, index) => {
-          if (r === "on") setSwitch(index, true);
-          if (r === "off") setSwitch(index, false);
-        });
-      }
     }
-  }, [solvedTrigger, switches]);
+  }, [solvedTrigger]);
 
   const click = () => {
     if (controls) {
-      audioButton.play();
+      audioButton.current?.play();
       setTimeout(() => {
         solvePuzzle(switches);
       }, 500);
@@ -62,13 +74,9 @@ export default function MainScreen({ show, config, solvePuzzle, solved, solvedTr
   const setSwitch = (index, value) => {
     if (controls) {
       if (value) {
-        if (audioSwitchUp) audioSwitchUp.play();
-      } else if (audioSwitchDown) audioSwitchDown.play();
-      const newSwitches = [...switches];
-      if (newSwitches.length > 0) {
-        newSwitches[index].pressed = value;
-        setSwitches(newSwitches);
-      }
+        audioSwitchUp.current?.play();
+      } else audioSwitchDown.current?.play();
+      setSwitches((prev) => prev.map((s, i) => (i === index ? { ...s, pressed: value } : s)));
     }
   };
 
@@ -96,7 +104,10 @@ export default function MainScreen({ show, config, solvePuzzle, solved, solvedTr
 
   return (
     <div id="MainScreen" className={"screen_wrapper"} style={{ backgroundImage: `url(${config.backgroundImg})` }}>
-      <div className={(solved ? "solved" : "") + " frame"} style={{ width: size.width * 0.85, height: size.height * 0.8 }}>
+      <div
+        className={(solved ? "solved" : "") + " frame"}
+        style={{ width: size.width * 0.85, height: size.height * 0.8 }}
+      >
         <div className="switches" style={{ gap: size.width * 0.01 }}>
           {switches.map((s, index) => (
             <Switch key={index} id={index} switchData={s} theme={config} setSwitch={setSwitch} size={size} />
@@ -106,11 +117,11 @@ export default function MainScreen({ show, config, solvePuzzle, solved, solvedTr
           <RoundButton theme={config} onClick={click} />
         </div>
       </div>
-      <audio id="audio_switch1" src={config.switchUpAudio} autostart="false" preload="auto" />
-      <audio id="audio_switch2" src={config.switchDownAudio} autostart="false" preload="auto" />
-      <audio id="audio_connection" src={config.connectionAudio} autostart="false" preload="auto" />
-      <audio id="audio_fail-connection" src={config.failAudio} autostart="false" preload="auto" />
-      <audio id="audio_button" src={config.buttonAudio} autostart="false" preload="auto" />
+      <audio ref={audioSwitchUp} id="audio_switch1" src={config.switchUpAudio} preload="auto" />
+      <audio ref={audioSwitchDown} id="audio_switch2" src={config.switchDownAudio} preload="auto" />
+      <audio ref={audioSuccess} id="audio_connection" src={config.connectionAudio} preload="auto" />
+      <audio ref={audioFail} id="audio_fail-connection" src={config.failAudio} preload="auto" />
+      <audio ref={audioButton} id="audio_button" src={config.buttonAudio} preload="auto" />
     </div>
   );
 }
