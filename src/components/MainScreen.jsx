@@ -25,7 +25,7 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
 
   useEffect(() => {
     if (switches.length > 0 && !solved && loadedSolution) {
-      const _result = loadedSolution.split(",");
+      const _result = loadedSolution.split(";");
 
       setSwitches((prev) =>
         prev.map((s, i) => {

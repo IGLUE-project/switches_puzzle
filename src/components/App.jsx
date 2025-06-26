@@ -3,15 +3,14 @@ import "./../assets/scss/app.scss";
 import "./../assets/scss/modal.scss";
 
 import {
-  ALLOWED_ACTIONS,
   DEFAULT_APP_SETTINGS,
   ESCAPP_CLIENT_SETTINGS,
   ICONS,
   SWITCHTYPE,
   THEME_ASSETS,
 } from "../constants/constants.jsx";
-import MainScreen from "./MainScreen.jsx";
 import { GlobalContext } from "./GlobalContext.jsx";
+import MainScreen from "./MainScreen.jsx";
 
 export default function App() {
   const { escapp, setEscapp, appSettings, setAppSettings, Storage, setStorage, Utils, I18n } =
@@ -86,7 +85,7 @@ export default function App() {
     Utils.log("Restore application state based on escape room state:", erState);
     // Si el puzle está resuelto lo ponemos en posicion de resuelto
     if (escapp.getAllPuzzlesSolved()) {
-      if (appSettings.actionAfterSolve === "LOAD_SOLUTION") {
+      if (appSettings.actionWhenLoadingIfSolved) {
         if (escapp.getAllPuzzlesSolved()) {
           let solution = escapp.getLastSolution();
           if (typeof solution !== "undefined") {
@@ -108,10 +107,6 @@ export default function App() {
 
     // Merge _appSettings with DEFAULT_APP_SETTINGS_SKIN to obtain final app settings
     _appSettings = Utils.deepMerge(DEFAULT_APP_SETTINGS_SKIN, _appSettings);
-
-    if (!ALLOWED_ACTIONS.includes(_appSettings.actionAfterSolve)) {
-      _appSettings.actionAfterSolve = DEFAULT_APP_SETTINGS.actionAfterSolve;
-    }
 
     //Init internacionalization module
     I18n.init(_appSettings);
@@ -172,7 +167,7 @@ export default function App() {
         if (s.pressed) return "on";
         else return "off";
       })
-      .join(",");
+      .join(";");
     checkResult(solutionStr);
   };
 
