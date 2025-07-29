@@ -3,14 +3,12 @@
 import { SWITCHTYPE, THEMES } from "./src/constants/constants";
 
 export let ESCAPP_APP_SETTINGS = {
-  //Settings that can be specified by the authors
-  skin: THEMES.BASIC, //skin can be "STANDARD", "RETRO" or "FUTURISTIC" or "BASIC".
-  // backgroundImg: "NONE", //background can be "NONE" or a URL.
-  actionAfterSolve: "LOAD_SOLUTION", //actionAfterSolve can be "NONE" or "LOAD_SOLUTION".
+  skin: THEMES.BASIC, //skin can be "RETRO" or "FUTURISTIC" or "BASIC".
+  actionWhenLoadingIfSolved: true,
+
   //message: "Custom message",
 
   //type: can be "LETTERS", "NUMBERS", "SHAPES", "COLORED SHAPES", "COLORS", "CUSTOM".
-  //areaColor: can be a color or "RAINBOW" for a rainbow gradient.
   switchType: SWITCHTYPE.CUSTOM,
   nSwitches: 6,
   customSwitches: [
@@ -59,7 +57,7 @@ export let ESCAPP_APP_SETTINGS = {
   locale: "es",
 
   escappClientSettings: {
-    endpoint: "https://escapp.etsisi.upm.es/api/escapeRooms/153",
+    endpoint: "https://escapp.es/api/escapeRooms/id",
     linkedPuzzleIds: [5],
     rtc: false,
   },
