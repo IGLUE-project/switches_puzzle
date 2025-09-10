@@ -5,6 +5,8 @@ import Switch from "./Switch";
 
 export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger, loadedSolution, setSolved }) {
   const [switches, setSwitches] = useState([]);
+  const [row1, setRow1] = useState([]);
+  const [row2, setRow2] = useState([]);
   const [size, setSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -20,6 +22,10 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
   useEffect(() => {
     if (config.switches && config.switches.length > 0) {
       setSwitches(config.switches.map((s) => s));
+      if (config.switches.length > 6) {
+        setRow1(config.switches.slice(0, Math.ceil(config.switches.length / 2)));
+        setRow2(config.switches.slice(Math.ceil(config.switches.length / 2), config.switches.length));
+      }
     }
   }, [config.switches]);
 
@@ -30,6 +36,22 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
       setSwitches((prev) =>
         prev.map((s, i) => {
           const state = _result[i];
+          if (state === "on") return { ...s, pressed: true };
+          if (state === "off") return { ...s, pressed: false };
+          return s;
+        }),
+      );
+      setRow1((prev) =>
+        prev.map((s, i) => {
+          const state = _result[i];
+          if (state === "on") return { ...s, pressed: true };
+          if (state === "off") return { ...s, pressed: false };
+          return s;
+        }),
+      );
+      setRow2((prev) =>
+        prev.map((s, i) => {
+          const state = _result[i + row1.length];
           if (state === "on") return { ...s, pressed: true };
           if (state === "off") return { ...s, pressed: false };
           return s;
@@ -48,6 +70,18 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
       audioFail.current?.play();
       setControls(false);
       setSwitches((prevSwitches) =>
+        prevSwitches.map((s) => ({
+          ...s,
+          pressed: false,
+        })),
+      );
+      setRow1((prevSwitches) =>
+        prevSwitches.map((s) => ({
+          ...s,
+          pressed: false,
+        })),
+      );
+      setRow2((prevSwitches) =>
         prevSwitches.map((s) => ({
           ...s,
           pressed: false,
@@ -75,8 +109,20 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
     if (controls) {
       if (value) {
         audioSwitchUp.current?.play();
-      } else audioSwitchDown.current?.play();
+      } else {
+        audioSwitchDown.current?.play();
+      }
+
       setSwitches((prev) => prev.map((s, i) => (i === index ? { ...s, pressed: value } : s)));
+      if (switches.length > 6) {
+        const mid = Math.ceil(switches.length / 2);
+
+        if (index >= mid) {
+          setRow2((prev) => prev.map((s, i) => (i + mid === index ? { ...s, pressed: value } : s)));
+        } else {
+          setRow1((prev) => prev.map((s, i) => (i === index ? { ...s, pressed: value } : s)));
+        }
+      }
     }
   };
 
@@ -106,12 +152,36 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
     <div id="MainScreen" className={"screen_wrapper"} style={{ backgroundImage: `url(${config.backgroundImg})` }}>
       <div
         className={(solved ? "solved" : "") + " frame"}
-        style={{ width: size.width * 0.85, height: size.height * 0.8 }}
+        style={{ width: size.width * 0.85, height: size.height * 0.75 }}
       >
-        <div className="switches" style={{ gap: size.width * 0.01 }}>
-          {switches.map((s, index) => (
-            <Switch key={index} id={index} switchData={s} theme={config} setSwitch={setSwitch} size={size} />
-          ))}
+        <div className="switches">
+          {row1.length > 0 && row2.length > 0 ? (
+            <>
+              <div className="row 1">
+                {row1.map((s, index) => (
+                  <Switch key={index} id={index} switchData={s} theme={config} setSwitch={setSwitch} size={size} />
+                ))}
+              </div>
+              <div className="row 2">
+                {row2.map((s, index) => (
+                  <Switch
+                    key={index + row1.length}
+                    id={index + row1.length}
+                    switchData={s}
+                    theme={config}
+                    setSwitch={setSwitch}
+                    size={size}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="row">
+              {switches.map((s, index) => (
+                <Switch key={index} id={index} switchData={s} theme={config} setSwitch={setSwitch} size={size} />
+              ))}
+            </div>
+          )}
         </div>
         <div className="button">
           <RoundButton theme={config} onClick={click} />

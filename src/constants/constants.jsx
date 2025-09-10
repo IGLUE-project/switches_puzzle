@@ -64,7 +64,7 @@ export const THEME_ASSETS = {
     buttonImg: "images/ancient_button.png",
     switchUpAudio: "sounds/switch1.wav",
     switchDownAudio: "sounds/switch2.wav",
-    failAudio: "sounds/fail-connection.wav",
+    failAudio: "",
     connectionAudio: "sounds/connection.wav",
     buttonAudio: "sounds/button-stone.wav",
   },
