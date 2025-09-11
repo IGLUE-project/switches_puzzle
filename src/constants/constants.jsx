@@ -1,5 +1,4 @@
 export const THEMES = {
-  BASIC: "BASIC",
   FUTURISTIC: "FUTURISTIC",
   STANDARD: "STANDARD",
   RETRO: "RETRO",
@@ -70,17 +69,6 @@ export const THEME_ASSETS = {
     connectionAudio: "sounds/connection.wav",
     buttonAudio: "sounds/button-stone.wav",
     torchAudio: "sounds/torch.wav",
-  },
-  [THEMES.BASIC]: {
-    backgroundImg: "images/basic_bg.png",
-    switchOnImg: "images/basic_switch_on.png",
-    switchOffImg: "images/basic_switch_off.png",
-    buttonImg: "images/basic_button.png",
-    switchUpAudio: "sounds/switch1.wav",
-    switchDownAudio: "sounds/switch2.wav",
-    failAudio: "sounds/fail-connection.wav",
-    connectionAudio: "sounds/connection.wav",
-    buttonAudio: "sounds/button.wav",
   },
   [THEMES.STANDARD]: {
     backgroundImg: "images/basic_bg.png",
