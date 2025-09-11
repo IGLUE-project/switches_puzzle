@@ -1,4 +1,5 @@
 import "../assets/scss/Switch.scss";
+import { THEMES } from "../constants/constants";
 import { iconMap } from "../icons/shapesIcons";
 
 const Switch = ({ id, switchData, theme, setSwitch, size }) => {
@@ -10,6 +11,7 @@ const Switch = ({ id, switchData, theme, setSwitch, size }) => {
   const color = switchData.color || "#FFE41E";
 
   const togglePalanca = () => {
+    if (theme.skin === THEMES.RETRO && !switchData.pressed) document.getElementById("torch").play();
     setSwitch(id, !switchData.pressed);
   };
 
@@ -49,12 +51,24 @@ const Switch = ({ id, switchData, theme, setSwitch, size }) => {
 
   return (
     <div className="Switch">
-      <div className="led-box" style={{ margin: ledBoxMargin + "px 0" }}>
-        <div
-          style={switchData.pressed ? ledCss : { height: ledBoxSize, width: ledBoxSize }}
-          className={(switchData.pressed ? "" : "led-off") + " led"}
-        ></div>
-      </div>
+      {theme.skin === THEMES.RETRO ? (
+        <div className="torch-box ">
+          <img
+            draggable="false"
+            style={{ height: size.height * 0.18, width: size.height * 0.18, objectFit: "contain" }}
+            className="torch"
+            src={switchData.pressed ? theme.torchOnImg : theme.torchOffImg}
+            alt=""
+          />
+        </div>
+      ) : (
+        <div className="led-box" style={{ margin: ledBoxMargin + "px 0" }}>
+          <div
+            style={switchData.pressed ? ledCss : { height: ledBoxSize, width: ledBoxSize }}
+            className={(switchData.pressed ? "" : "led-off") + " led"}
+          ></div>
+        </div>
+      )}
 
       <img
         className="switch-img"
@@ -65,6 +79,7 @@ const Switch = ({ id, switchData, theme, setSwitch, size }) => {
       />
 
       <div className="data">{getDataLabel()}</div>
+      <audio id="torch" src={theme.torchAudio} autostart="false" preload="auto" />
     </div>
   );
 };
