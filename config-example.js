@@ -1,12 +1,8 @@
 //Copy this file to config.js and specify your own settings
 
-import { SWITCHTYPE, THEMES } from "./src/constants/constants";
-
 export let ESCAPP_APP_SETTINGS = {
-  skin: THEMES.BASIC, //skin can be "RETRO" or "FUTURISTIC" or "BASIC".
+  skin: "STANDARD", //skin can be "RETRO" or "FUTURISTIC" or "STANDARD".
   actionWhenLoadingIfSolved: true,
-
-  //message: "Custom message",
 
   //type: can be "LETTERS", "NUMBERS", "SHAPES", "COLORED SHAPES", "COLORS", "CUSTOM".
   switchType: SWITCHTYPE.CUSTOM,
