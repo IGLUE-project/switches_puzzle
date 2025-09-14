@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "./../assets/scss/app.scss";
-import "./../assets/scss/modal.scss";
 
 import {
   COLORS,
@@ -14,8 +13,7 @@ import { GlobalContext } from "./GlobalContext.jsx";
 import MainScreen from "./MainScreen.jsx";
 
 export default function App() {
-  const { escapp, setEscapp, appSettings, setAppSettings, Storage, setStorage, Utils, I18n } =
-    useContext(GlobalContext);
+  const { escapp, setEscapp, appSettings, setAppSettings, Storage, setStorage, Utils, I18n } = useContext(GlobalContext);
   const hasExecutedEscappValidation = useRef(false);
 
   const [loading, setLoading] = useState(true);
@@ -101,7 +99,10 @@ export default function App() {
     if (typeof _appSettings !== "object") {
       _appSettings = {};
     }
-
+    if((typeof _appSettings.skin === "undefined")&&(typeof DEFAULT_APP_SETTINGS.skin === "string")){
+      _appSettings.skin = DEFAULT_APP_SETTINGS.skin;
+    }
+    
     let skinSettings = THEME_ASSETS[_appSettings.skin] || {};
 
     let DEFAULT_APP_SETTINGS_SKIN = Utils.deepMerge(DEFAULT_APP_SETTINGS, skinSettings);
@@ -111,10 +112,6 @@ export default function App() {
 
     //Init internacionalization module
     I18n.init(_appSettings);
-
-    if (typeof _appSettings.message !== "string") {
-      _appSettings.message = I18n.getTrans("i.message");
-    }
 
     let switches = [];
 

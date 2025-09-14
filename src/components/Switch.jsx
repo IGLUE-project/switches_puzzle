@@ -1,8 +1,11 @@
 import "../assets/scss/Switch.scss";
+import { useContext } from "react";
+import { GlobalContext } from "./GlobalContext.jsx";
 import { THEMES } from "../constants/constants";
 import { iconMap } from "../icons/shapesIcons";
 
 const Switch = ({ id, switchData, theme, setSwitch, size }) => {
+  const { appSettings } = useContext(GlobalContext);
   const ledBoxSize = size.width * 0.02;
   const ledBoxMargin = size.width * 0.01;
   const imgSize = size.width * 0.035;
@@ -50,9 +53,9 @@ const Switch = ({ id, switchData, theme, setSwitch, size }) => {
   };
 
   return (
-    <div className="Switch">
+    <div className={"Switch" + (appSettings.switchType === "COLORS" ? " coloredSwitch" : "")} switchnumber={id+1}>
       {theme.skin === THEMES.RETRO ? (
-        <div className="torch-box ">
+        <div className="torch-box">
           <img
             draggable="false"
             style={{ height: size.height * 0.18, width: size.height * 0.18, objectFit: "contain" }}

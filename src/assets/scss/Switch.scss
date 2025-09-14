@@ -46,6 +46,87 @@
   }
 }
 
+#global_wrapper div.Switch div.data {
+  font-weight: bold;
+}
+
+#global_wrapper.standard div.Switch div.data {
+  color: white;
+}
+
+#global_wrapper.standard div.frame div.button {
+  transition: all 0.2s ease;
+}
+
+#global_wrapper.standard div.frame:not(.solved) div.button:active {
+  filter: brightness(0.9);
+}
+
+#global_wrapper.retro div.Switch div.data {
+  color: white;
+}
+
+#global_wrapper.retro div.frame:not(.solved) div.button:active {
+  transform: scale(0.95);
+}
+
+#global_wrapper.retro div.Switch div.data {
+  color: white;
+}
+
+#global_wrapper.futuristic div.frame:not(.solved) div.button:active {
+  transform: scale(0.95);
+}
+
+#global_wrapper.futuristic div.Switch div.data {
+  color: white;
+}
+
+/* Color filters */
+
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="1"] div.torch-box img {
+  filter: invert(0%) sepia(95%) saturate(1930%) hue-rotate(1deg) brightness(90%) contrast(144%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="2"] div.torch-box img {
+  filter: invert(0%) sepia(91%) saturate(522%) hue-rotate(75deg) brightness(92%) contrast(85%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="3"] div.torch-box img {
+  filter: grayscale(100%) sepia(100%) hue-rotate(200deg) saturate(500%) brightness(80%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="4"] div.torch-box img {
+  filter: invert(2%) sepia(162%) saturate(619%) hue-rotate(359deg) brightness(250%) contrast(105%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="5"] div.torch-box img {
+  filter: invert(20%) sepia(115%) saturate(1430%) hue-rotate(5deg) brightness(90%) contrast(120%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="6"] div.torch-box img {
+  filter: invert(25%) sepia(200%) saturate(288%) hue-rotate(300deg) brightness(105%) contrast(128%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="7"] div.torch-box img {
+  filter: invert(5%) sepia(60%) saturate(299%) hue-rotate(162deg) brightness(120%) contrast(79%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="8"] div.torch-box img {
+  filter: invert(10%) sepia(0%) saturate(288%) hue-rotate(265deg) brightness(92%) contrast(127%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="9"] div.torch-box img {
+  filter: grayscale(100%) sepia(100%) saturate(600%) hue-rotate(5deg) brightness(65%) contrast(105%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="10"] div.torch-box img {
+  filter: brightness(20%) saturate(27%) invert(0%) contrast(90%) brightness(95%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="11"] div.torch-box img {
+  filter: grayscale(100%) brightness(60%) contrast(50%)
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="12"] div.torch-box img {
+  filter: brightness(20%) saturate(27%) invert(100%) contrast(90%) brightness(105%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="13"] div.torch-box img {
+  filter: invert(20%) sepia(100%) saturate(1266%) hue-rotate(142deg) brightness(127%) contrast(79%);
+}
+#global_wrapper.retro div.Switch.coloredSwitch[switchnumber="14"] div.torch-box img {
+  filter: invert(20%) sepia(100%) saturate(537%) hue-rotate(65deg) brightness(153%) contrast(95%)
+}
+
 .fail .led {
   background-color: #f00;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;

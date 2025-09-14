@@ -1,55 +1,41 @@
 //Copy this file to config.js and specify your own settings
 
 export let ESCAPP_APP_SETTINGS = {
-  skin: "STANDARD", //skin can be "RETRO" or "FUTURISTIC" or "STANDARD".
-  actionWhenLoadingIfSolved: true,
+  //Settings that can be specified by the authors
+  skin: "RETRO", //skin can be "STANDARD", "RETRO", or "FUTURISTIC".
+  // backgroundImg: "NONE", //background can be "NONE" or a URL.
+  //backgroundImg: "https://cdn.midjourney.com/d38f18f5-2b16-482b-9873-62fe85210126/0_2.png",
+  actionWhenLoadingIfSolved: false,
 
-  //type: can be "LETTERS", "NUMBERS", "SHAPES", "COLORED SHAPES", "COLORS", "CUSTOM".
-  switchType: SWITCHTYPE.CUSTOM,
-  nSwitches: 6,
+  nSwitches: 6, //the number of switches.
+  switchType: "LETTERS", //switchType can be "LETTERS", "NUMBERS", "SHAPES", "COLORED SHAPES", "COLORS" or "CUSTOM".
+  
+  //If switchType is CUSTOM, customSwitches should be specified.
   customSwitches: [
     {
-      color: "#3abf19",
-      label: "👽",
-      image: "",
-      ico: "",
+      label: "👽"
     },
     {
-      color: "#c70000",
-      label: "switch 2",
-      image: "/src/assets/react.svg",
+      image: "/images/favicon.svg"
     },
     {
-      color: "#0021c7",
-      label: "cable 2",
-      image: "",
-      colorIco: "#fff",
+      label: "cable 2"
     },
     {
-      color: "#c700b5",
       label: "cable 3",
-      image: "",
-      ico: "circle",
-      colorIco: "#fff",
+      color: "green" //light color
     },
     {
-      color: "#c700b5",
-      label: "cable 3",
-      image: "",
-      ico: "star",
-      colorIco: "red",
+      label: "cable 4",
+      color: "#c700b5"
     },
     {
-      color: "#c700b5",
-      label: "cable 3",
-      image: "",
-      ico: "square",
-      colorIco: "yellow",
+      label: "cable 5",
+      color: "#c700b5"
     },
   ],
 
   //Settings that will be automatically specified by the Escapp server
-  // solutionLength: 3,
   locale: "es",
 
   escappClientSettings: {
