@@ -53,9 +53,9 @@ const Switch = ({ id, switchData, theme, setSwitch, size }) => {
   };
 
   return (
-    <div className={"Switch" + (appSettings.switchType === "COLORS" ? " coloredSwitch" : "")} switchnumber={id+1}>
+    <div className={"Switch" + (appSettings.switchType === "COLORS" ? " coloredSwitch" : "")} switchnumber={id + 1}>
       {theme.skin === THEMES.RETRO ? (
-        <div className="torch-box">
+        <div className="torch-box" style={{ margin: ledBoxMargin + "px 0", height: size.height * 0.17 }}>
           <img
             draggable="false"
             style={{ height: size.height * 0.18, width: size.height * 0.18, objectFit: "contain" }}
@@ -65,7 +65,7 @@ const Switch = ({ id, switchData, theme, setSwitch, size }) => {
           />
         </div>
       ) : (
-        <div className="led-box" style={{ margin: ledBoxMargin + "px 0" }}>
+        <div className="led-box" style={{ margin: ledBoxMargin + "px 0", height: size.height * 0.05 }}>
           <div
             style={switchData.pressed ? ledCss : { height: ledBoxSize, width: ledBoxSize }}
             className={(switchData.pressed ? "" : "led-off") + " led"}

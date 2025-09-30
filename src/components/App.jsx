@@ -8,12 +8,14 @@ import {
   ICONS,
   SWITCHTYPE,
   THEME_ASSETS,
+  THEMES,
 } from "../constants/constants.jsx";
 import { GlobalContext } from "./GlobalContext.jsx";
 import MainScreen from "./MainScreen.jsx";
 
 export default function App() {
-  const { escapp, setEscapp, appSettings, setAppSettings, Storage, setStorage, Utils, I18n } = useContext(GlobalContext);
+  const { escapp, setEscapp, appSettings, setAppSettings, Storage, setStorage, Utils, I18n } =
+    useContext(GlobalContext);
   const hasExecutedEscappValidation = useRef(false);
 
   const [loading, setLoading] = useState(true);
@@ -99,10 +101,10 @@ export default function App() {
     if (typeof _appSettings !== "object") {
       _appSettings = {};
     }
-    if((typeof _appSettings.skin === "undefined")&&(typeof DEFAULT_APP_SETTINGS.skin === "string")){
+    if (typeof _appSettings.skin === "undefined" && typeof DEFAULT_APP_SETTINGS.skin === "string") {
       _appSettings.skin = DEFAULT_APP_SETTINGS.skin;
     }
-    
+
     let skinSettings = THEME_ASSETS[_appSettings.skin] || {};
 
     let DEFAULT_APP_SETTINGS_SKIN = Utils.deepMerge(DEFAULT_APP_SETTINGS, skinSettings);
@@ -123,13 +125,19 @@ export default function App() {
         switches = (_, i) => ({ color: COLORS[i % COLORS.length] });
         break;
       case SWITCHTYPE.SHAPES:
-        switches = (_, i) => ({ ico: ICONS[i % ICONS.length] || "" });
+        switches = (_, i) => ({
+          ico: ICONS[i % ICONS.length] || "",
+          colorIco: _appSettings.skin === THEMES.STANDARD ? "white" : "black",
+        });
         break;
       case SWITCHTYPE.COLORED_SHAPES:
         switches = (_, i) => ({ ico: ICONS[i % ICONS.length] || "", colorIco: COLORS[i % COLORS.length] });
         break;
       case SWITCHTYPE.CUSTOM:
         switches = _appSettings.customSwitches;
+        break;
+      case SWITCHTYPE.NONE:
+        switches = switches = () => ({});
         break;
       default:
         switches = (_, i) => ({ label: String.fromCharCode(65 + (i % 26)) });

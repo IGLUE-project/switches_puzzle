@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./../assets/scss/MainScreen.scss";
 import RoundButton from "./RoundButton";
 import Switch from "./Switch";
+import { THEMES } from "../constants/constants";
 
 export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger, loadedSolution, setSolved }) {
   const [switches, setSwitches] = useState([]);
@@ -12,6 +13,7 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
     height: window.innerHeight,
   });
   const [controls, setControls] = useState(true);
+  const [marginTop, setMarginTop] = useState("-10vh");
 
   const audioSwitchUp = useRef(null);
   const audioSwitchDown = useRef(null);
@@ -26,6 +28,17 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
         setRow1(config.switches.slice(0, Math.ceil(config.switches.length / 2)));
         setRow2(config.switches.slice(Math.ceil(config.switches.length / 2), config.switches.length));
       }
+    }
+    switch (config.skin) {
+      case THEMES.STANDARD:
+        setMarginTop("-6vh");
+        break;
+      case THEMES.RETRO:
+        setMarginTop("-10vh");
+        break;
+      case THEMES.FUTURISTIC:
+        setMarginTop("-2vh");
+        break;
     }
   }, [config.switches]);
 
@@ -99,9 +112,7 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
   const click = () => {
     if (controls) {
       audioButton.current?.play();
-      setTimeout(() => {
-        solvePuzzle(switches);
-      }, 500);
+      solvePuzzle(switches);
     }
   };
 
@@ -152,17 +163,21 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
     <div id="MainScreen" className={"screen_wrapper"} style={{ backgroundImage: `url(${config.backgroundImg})` }}>
       <div
         className={(solved ? "solved" : "") + " frame"}
-        style={{ width: size.width * 0.85, height: size.height * 0.75 }}
+        style={{
+          width: size.width * 0.85,
+          height: size.height * 0.75,
+          marginTop: marginTop,
+        }}
       >
         <div className="switches">
           {row1.length > 0 && row2.length > 0 ? (
             <>
-              <div className="row 1">
+              <div className="row 1" style={{ gap: size.height * 0.012 + "px" }}>
                 {row1.map((s, index) => (
                   <Switch key={index} id={index} switchData={s} theme={config} setSwitch={setSwitch} size={size} />
                 ))}
               </div>
-              <div className="row 2">
+              <div className="row 2" style={{ gap: size.height * 0.012 + "px" }}>
                 {row2.map((s, index) => (
                   <Switch
                     key={index + row1.length}
@@ -176,7 +191,7 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
               </div>
             </>
           ) : (
-            <div className="row">
+            <div className="row" style={{ gap: size.height * 0.012 + "px" }}>
               {switches.map((s, index) => (
                 <Switch key={index} id={index} switchData={s} theme={config} setSwitch={setSwitch} size={size} />
               ))}
@@ -184,7 +199,13 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
           )}
         </div>
         <div className="button">
-          <RoundButton theme={config} onClick={click} />
+          <RoundButton
+            theme={config}
+            onClick={click}
+            solved={solved}
+            solvedTrigger={solvedTrigger}
+            controls={controls}
+          />
         </div>
       </div>
       <audio ref={audioSwitchUp} id="audio_switch1" src={config.switchUpAudio} preload="auto" />

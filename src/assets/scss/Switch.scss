@@ -13,9 +13,7 @@
   }
 
   .led-box {
-    height: 30px;
     width: 25%;
-    margin: 10px 0;
     float: left;
 
     .led {
@@ -24,8 +22,6 @@
     }
   }
   .torch-box {
-    height: 140px;
-    margin: 10px 0;
     float: left;
   }
 
@@ -115,7 +111,7 @@
   filter: brightness(20%) saturate(27%) invert(0%) contrast(90%) brightness(95%);
 }
 #global_wrapper.retro div.Switch.coloredSwitch[switchnumber="11"] div.torch-box img {
-  filter: grayscale(100%) brightness(60%) contrast(50%)
+  filter: grayscale(100%) brightness(60%) contrast(50%);
 }
 #global_wrapper.retro div.Switch.coloredSwitch[switchnumber="12"] div.torch-box img {
   filter: brightness(20%) saturate(27%) invert(100%) contrast(90%) brightness(105%);
@@ -124,7 +120,7 @@
   filter: invert(20%) sepia(100%) saturate(1266%) hue-rotate(142deg) brightness(127%) contrast(79%);
 }
 #global_wrapper.retro div.Switch.coloredSwitch[switchnumber="14"] div.torch-box img {
-  filter: invert(20%) sepia(100%) saturate(537%) hue-rotate(65deg) brightness(153%) contrast(95%)
+  filter: invert(20%) sepia(100%) saturate(537%) hue-rotate(65deg) brightness(153%) contrast(95%);
 }
 
 .fail .led {
