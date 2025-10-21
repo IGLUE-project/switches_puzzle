@@ -31,13 +31,13 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
     }
     switch (config.skin) {
       case THEMES.STANDARD:
-        setMarginTop("-6vh");
+        setMarginTop("-2.5vh");
         break;
       case THEMES.RETRO:
         setMarginTop("-10vh");
         break;
       case THEMES.FUTURISTIC:
-        setMarginTop("-2vh");
+        setMarginTop("1vh");
         break;
     }
   }, [config.switches]);

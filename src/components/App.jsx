@@ -175,6 +175,7 @@ export default function App() {
   };
 
   function checkResult(_solution) {
+    //Utils.log("Check solution", _solution);
     escapp.checkNextPuzzle(_solution, {}, (success, erState) => {
       Utils.log("Check solution Escapp response", success, erState);
       setSolved(success);

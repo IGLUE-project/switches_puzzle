@@ -7,11 +7,23 @@ import { iconMap } from "../icons/shapesIcons";
 const Switch = ({ id, switchData, theme, setSwitch, size }) => {
   const { appSettings } = useContext(GlobalContext);
   const ledBoxSize = size.width * 0.02;
-  const ledBoxMargin = size.width * 0.01;
+  let ledBoxMargin;
   const imgSize = size.width * 0.035;
   const iconSize = size.width * 0.04;
   const fontSize = size.width * 0.025;
   const color = switchData.color || "#FFE41E";
+
+  switch (theme.skin) {
+    case THEMES.STANDARD:
+      ledBoxMargin = size.width * 0.002;
+      break;
+    case THEMES.RETRO:
+      ledBoxMargin = size.width * 0.01;
+      break;
+    case THEMES.FUTURISTIC:
+      ledBoxMargin = size.width * 0.002;
+      break;
+  }
 
   const togglePalanca = () => {
     if (theme.skin === THEMES.RETRO && !switchData.pressed) document.getElementById("torch").play();
