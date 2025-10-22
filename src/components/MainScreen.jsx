@@ -44,32 +44,17 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
 
   useEffect(() => {
     if (switches.length > 0 && !solved && loadedSolution) {
-      const _result = loadedSolution.split(";");
+      const _result = loadedSolution.split(";").map((x) => parseInt(x, 10) - 1);
 
-      setSwitches((prev) =>
-        prev.map((s, i) => {
-          const state = _result[i];
-          if (state === "on") return { ...s, pressed: true };
-          if (state === "off") return { ...s, pressed: false };
-          return s;
-        }),
-      );
-      setRow1((prev) =>
-        prev.map((s, i) => {
-          const state = _result[i];
-          if (state === "on") return { ...s, pressed: true };
-          if (state === "off") return { ...s, pressed: false };
-          return s;
-        }),
-      );
-      setRow2((prev) =>
-        prev.map((s, i) => {
-          const state = _result[i + row1.length];
-          if (state === "on") return { ...s, pressed: true };
-          if (state === "off") return { ...s, pressed: false };
-          return s;
-        }),
-      );
+      const updateRow = (prev, offset = 0) =>
+        prev.map((s, i) => ({
+          ...s,
+          pressed: _result.includes(i + offset),
+        }));
+
+      setSwitches((prev) => updateRow(prev));
+      setRow1((prev) => updateRow(prev));
+      setRow2((prev) => updateRow(prev, row1.length));
 
       setControls(false);
       setSolved(true);

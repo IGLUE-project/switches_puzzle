@@ -166,10 +166,8 @@ export default function App() {
 
   const solvePuzzle = (solution) => {
     const solutionStr = solution
-      .map((s) => {
-        if (s.pressed) return "on";
-        else return "off";
-      })
+      .map((s, i) => (s.pressed ? i + 1 : null))
+      .filter((x) => x !== null)
       .join(";");
     checkResult(solutionStr);
   };
