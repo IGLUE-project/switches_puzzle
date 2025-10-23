@@ -72,6 +72,7 @@ export const COLORS = [
 export const THEME_ASSETS = {
   [THEMES.STANDARD]: {
     backgroundImg: "images/basic_bg.png",
+    containerImg: "images/basic_container.png",
     switchOnImg: "images/basic_switch_on.png",
     switchOffImg: "images/basic_switch_off.png",
     buttonImg: "images/basic_button.png",
@@ -84,6 +85,7 @@ export const THEME_ASSETS = {
   },
   [THEMES.RETRO]: {
     backgroundImg: "images/retro_bg.png",
+    containerImg: "images/retro_container.png",
     switchOnImg: "images/retro_switch_on.png",
     switchOffImg: "images/retro_switch_off.png",
     buttonImg: "images/retro_button.png",
@@ -98,7 +100,8 @@ export const THEME_ASSETS = {
     torchAudio: "sounds/torch.wav",
   },
   [THEMES.FUTURISTIC]: {
-    backgroundImg: "images/futuristic_bg.png",
+    backgroundImg: "images/futuristic_bg_.png",
+    containerImg: "images/futuristic_container_2.png",
     switchOnImg: "images/futuristic_switch_on.png",
     switchOffImg: "images/futuristic_switch_off.png",
     buttonImg: "images/futuristic_button.png",

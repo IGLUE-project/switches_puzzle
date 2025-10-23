@@ -34,7 +34,7 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
         setMarginTop("-2.5vh");
         break;
       case THEMES.RETRO:
-        setMarginTop("-10vh");
+        setMarginTop("0vh");
         break;
       case THEMES.FUTURISTIC:
         setMarginTop("1vh");
@@ -149,11 +149,16 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
       <div
         className={(solved ? "solved" : "") + " frame"}
         style={{
-          width: size.width * 0.85,
-          height: size.height * 0.75,
+          width: size.width * 0.95,
+          height: size.height * 0.95,
           marginTop: marginTop,
+          backgroundImage: `url(${config.containerImg})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat"
         }}
       >
+     
+     
         <div className="switches">
           {row1.length > 0 && row2.length > 0 ? (
             <>
@@ -182,6 +187,7 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
               ))}
             </div>
           )}
+   
         </div>
         <div className="button">
           <RoundButton
