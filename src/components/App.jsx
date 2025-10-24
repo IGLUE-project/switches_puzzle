@@ -127,7 +127,7 @@ export default function App() {
       case SWITCHTYPE.SHAPES:
         switches = (_, i) => ({
           ico: ICONS[i % ICONS.length] || "",
-          colorIco: _appSettings.skin === THEMES.STANDARD ? "white" : "black",
+          colorIco: _appSettings.skin === THEMES.RETRO ? "black" : "white",
         });
         break;
       case SWITCHTYPE.COLORED_SHAPES:

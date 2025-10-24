@@ -15,13 +15,13 @@ const Switch = ({ id, switchData, theme, setSwitch, size }) => {
 
   switch (theme.skin) {
     case THEMES.STANDARD:
-      ledBoxMargin = size.width * 0.002;
+      ledBoxMargin = size.width * 0;
       break;
     case THEMES.RETRO:
       ledBoxMargin = size.width * 0.01;
       break;
     case THEMES.FUTURISTIC:
-      ledBoxMargin = size.width * 0.002;
+      ledBoxMargin = size.width * 0;
       break;
   }
 

@@ -13,7 +13,7 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
     height: window.innerHeight,
   });
   const [controls, setControls] = useState(true);
-  const [marginTop, setMarginTop] = useState("-10vh");
+  const [marginTop, setMarginTop] = useState("0vh");
 
   const audioSwitchUp = useRef(null);
   const audioSwitchDown = useRef(null);
@@ -29,17 +29,17 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
         setRow2(config.switches.slice(Math.ceil(config.switches.length / 2), config.switches.length));
       }
     }
-    switch (config.skin) {
-      case THEMES.STANDARD:
-        setMarginTop("-2.5vh");
-        break;
-      case THEMES.RETRO:
-        setMarginTop("0vh");
-        break;
-      case THEMES.FUTURISTIC:
-        setMarginTop("1vh");
-        break;
-    }
+    // switch (config.skin) {
+    //   case THEMES.STANDARD:
+    //     setMarginTop("0vh");
+    //     break;
+    //   case THEMES.RETRO:
+    //     setMarginTop("0vh");
+    //     break;
+    //   case THEMES.FUTURISTIC:
+    //     setMarginTop("0vh");
+    //     break;
+    // }
   }, [config.switches]);
 
   useEffect(() => {
@@ -127,12 +127,23 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
 
+      let contentPercentage = 0.95;
+      // switch (config.skin) {
+      // case THEMES.STANDARD:
+      // case THEMES.RETRO:
+      //   contentPercentage = 0.95;
+      //   break;
+      // case THEMES.FUTURISTIC:
+      //   contentPercentage = 0.95;
+      //   break;
+      // }
+
       const aspectRatio = 16 / 9;
-      let width = windowWidth * 0.9;
+      let width = windowWidth * contentPercentage;
       let height = width / aspectRatio;
 
-      if (height > windowHeight * 0.9) {
-        height = windowHeight * 0.9;
+      if (height > windowHeight * contentPercentage) {
+        height = windowHeight * contentPercentage;
         width = height * aspectRatio;
       }
 
@@ -149,25 +160,23 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
       <div
         className={(solved ? "solved" : "") + " frame"}
         style={{
-          width: size.width * 0.95,
-          height: size.height * 0.95,
+          width: size.width,
+          height: size.height,
           marginTop: marginTop,
           backgroundImage: `url(${config.containerImg})`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat"
         }}
       >
-     
-     
         <div className="switches">
           {row1.length > 0 && row2.length > 0 ? (
             <>
-              <div className="row 1" style={{ gap: size.height * 0.012 + "px" }}>
+              <div className="row 1" style={{ gap: size.height * 0.013 + "px" }}>
                 {row1.map((s, index) => (
                   <Switch key={index} id={index} switchData={s} theme={config} setSwitch={setSwitch} size={size} />
                 ))}
               </div>
-              <div className="row 2" style={{ gap: size.height * 0.012 + "px" }}>
+              <div className="row 2" style={{ gap: size.height * 0.013 + "px" }}>
                 {row2.map((s, index) => (
                   <Switch
                     key={index + row1.length}
@@ -181,7 +190,7 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
               </div>
             </>
           ) : (
-            <div className="row" style={{ gap: size.height * 0.012 + "px" }}>
+            <div className="row" style={{ gap: size.height * 0.013 + "px" }}>
               {switches.map((s, index) => (
                 <Switch key={index} id={index} switchData={s} theme={config} setSwitch={setSwitch} size={size} />
               ))}

@@ -73,8 +73,8 @@ export const THEME_ASSETS = {
   [THEMES.STANDARD]: {
     backgroundImg: "images/basic_bg.png",
     containerImg: "images/basic_container.png",
-    switchOnImg: "images/basic_switch_on.png",
-    switchOffImg: "images/basic_switch_off.png",
+    switchOnImg: "images/switch_standard_on.png",
+    switchOffImg: "images/switch_standard_off.png",
     buttonImg: "images/basic_button.png",
     buttonSolvedImg: "images/basic_button_ok.png",
     switchUpAudio: "sounds/switch1.wav",
@@ -84,7 +84,7 @@ export const THEME_ASSETS = {
     buttonAudio: "sounds/button.wav",
   },
   [THEMES.RETRO]: {
-    backgroundImg: "images/retro_bg.png",
+    backgroundImg: "images/background_retro.jpg",
     containerImg: "images/retro_container.png",
     switchOnImg: "images/retro_switch_on.png",
     switchOffImg: "images/retro_switch_off.png",
@@ -100,8 +100,8 @@ export const THEME_ASSETS = {
     torchAudio: "sounds/torch.wav",
   },
   [THEMES.FUTURISTIC]: {
-    backgroundImg: "images/futuristic_bg_.png",
-    containerImg: "images/futuristic_container_2.png",
+    backgroundImg: "images/futuristic_bg.png",
+    containerImg: "images/futuristic_container.png",
     switchOnImg: "images/futuristic_switch_on.png",
     switchOffImg: "images/futuristic_switch_off.png",
     buttonImg: "images/futuristic_button.png",
