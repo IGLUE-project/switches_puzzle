@@ -62,7 +62,9 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
   }, [loadedSolution, switches]);
 
   useEffect(() => {
+    if (solvedTrigger < 1) return;
     if (loadedSolution) return;
+
     if (!solved) {
       audioSwitchDown.current?.play();
       audioFail.current?.play();
