@@ -71,7 +71,7 @@ export const COLORS = [
 
 export const THEME_ASSETS = {
   [THEMES.STANDARD]: {
-    backgroundImg: "images/basic_bg.png",
+    backgroundImg: "images/standard_bg.png",
     containerImg: "images/basic_container.png",
     switchOnImg: "images/switch_standard_on.png",
     switchOffImg: "images/switch_standard_off.png",
@@ -84,7 +84,7 @@ export const THEME_ASSETS = {
     buttonAudio: "sounds/button.wav",
   },
   [THEMES.RETRO]: {
-    backgroundImg: "images/background_retro.jpg",
+    backgroundImg: "images/retro_bg.png",
     containerImg: "images/retro_container.png",
     switchOnImg: "images/retro_switch_on.png",
     switchOffImg: "images/retro_switch_off.png",
