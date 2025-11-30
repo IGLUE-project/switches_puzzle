@@ -102,9 +102,11 @@ export default function App() {
     if (typeof _appSettings.skin === "undefined" && typeof DEFAULT_APP_SETTINGS.skin === "string") {
       _appSettings.skin = DEFAULT_APP_SETTINGS.skin;
     }
+    if ((typeof _appSettings.backgroundImg !== "string")||(_appSettings.backgroundImg.trim()==="")){
+      delete _appSettings.backgroundImg;
+    }
 
     let skinSettings = THEME_ASSETS[_appSettings.skin] || {};
-
     let DEFAULT_APP_SETTINGS_SKIN = Utils.deepMerge(DEFAULT_APP_SETTINGS, skinSettings);
 
     // Merge _appSettings with DEFAULT_APP_SETTINGS_SKIN to obtain final app settings

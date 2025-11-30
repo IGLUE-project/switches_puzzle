@@ -157,8 +157,14 @@ export default function MainScreen({ config, solvePuzzle, solved, solvedTrigger,
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  let hasBackground = ((typeof config.backgroundImg === "string")&&(config.backgroundImg !== "NONE")&&(config.backgroundImg.trim()!==""));
   return (
-    <div id="MainScreen" className={"screen_wrapper"} style={{ backgroundImage: `url(${config.backgroundImg})` }}>
+    <div id="MainScreen" 
+      className={"screen_wrapper"} 
+      {...(hasBackground && {
+        style: { backgroundImage: `url(${config.backgroundImg})` }
+      })}
+    >
       <div
         className={(solved ? "solved" : "") + " frame"}
         style={{
