@@ -5,9 +5,9 @@ export const DEFAULT_APP_SETTINGS = {
   switchType: "NONE",
   customSwitches: [],
   backgroundImg: "",
-  switchOnImg: "images/basic_switch_on.png",
-  switchOffImg: "images/basic_switch_off.png",
-  buttonImg: "images/basic_button.png",
+  switchOnImg: "images/standard_switch_on.png",
+  switchOffImg: "images/standard_switch_off.png",
+  buttonImg: "images/standard_button.png",
   switchUpAudio: "sounds/switch1.wav",
   switchDownAudio: "sounds/switch2.wav",
   failAudio: "sounds/fail-connection.wav",
@@ -71,12 +71,12 @@ export const COLORS = [
 
 export const THEME_ASSETS = {
   [THEMES.STANDARD]: {
-    backgroundImg: "images/standard_bg.png",
-    containerImg: "images/basic_container.png",
+    backgroundImg: "images/standard_background.png",
+    containerImg: "images/standard_container.png",
     switchOnImg: "images/switch_standard_on.png",
     switchOffImg: "images/switch_standard_off.png",
-    buttonImg: "images/basic_button.png",
-    buttonSolvedImg: "images/basic_button_ok.png",
+    buttonImg: "images/standard_button.png",
+    buttonSolvedImg: "images/standard_button_ok.png",
     switchUpAudio: "sounds/switch1.wav",
     switchDownAudio: "sounds/switch2.wav",
     failAudio: "sounds/fail-connection.wav",
@@ -84,7 +84,7 @@ export const THEME_ASSETS = {
     buttonAudio: "sounds/button.wav",
   },
   [THEMES.RETRO]: {
-    backgroundImg: "images/retro_bg.png",
+    backgroundImg: "images/retro_background.jpg",
     containerImg: "images/retro_container.png",
     switchOnImg: "images/retro_switch_on.png",
     switchOffImg: "images/retro_switch_off.png",
@@ -100,7 +100,7 @@ export const THEME_ASSETS = {
     torchAudio: "sounds/torch.wav",
   },
   [THEMES.FUTURISTIC]: {
-    backgroundImg: "images/futuristic_bg.png",
+    backgroundImg: "images/futuristic_background.png",
     containerImg: "images/futuristic_container.png",
     switchOnImg: "images/futuristic_switch_on.png",
     switchOffImg: "images/futuristic_switch_off.png",
